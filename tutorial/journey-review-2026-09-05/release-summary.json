@@ -1,0 +1,19 @@
+{
+  "release_commit": "a4db80459e4e56d4d268fb6ce33d594933ff9f08",
+  "members": [
+    {
+      "package": "meridian-auth",
+      "version": "0.2.0",
+      "tag": "meridian-auth/v0.2.0",
+      "artifacts": [
+        "meridian_auth-0.2.0-py3-none-any.whl",
+        "meridian_auth-0.2.0.tar.gz"
+      ],
+      "promotion": {
+        "id": "58fb356a-fcfc-48fd-87fb-e91cd96267df",
+        "state": "pending"
+      }
+    }
+  ],
+  "exit_code": 0
+}

@@ -1,0 +1,34 @@
+name: Build and test distributions
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-test:
+    name: Build and test distributions
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the exact revision
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.11.28"
+
+      - name: Build, install, and test the wheels outside the workspace
+        run: ./demo build --out "$RUNNER_TEMP/meridian-distributions"
+
+      - name: Preserve the exact tested artifacts and source identity
+        uses: actions/upload-artifact@v4
+        with:
+          name: meridian-distributions
+          path: ${{ runner.temp }}/meridian-distributions
+          if-no-files-found: error
+          retention-days: 7

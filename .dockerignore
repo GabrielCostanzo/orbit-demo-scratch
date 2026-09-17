@@ -1,0 +1,16 @@
+**
+!Dockerfile
+!.orbit-image-context
+!.orbit-image-context/wheels
+!.orbit-image-context/wheels/*.whl
+!.orbit-image-context/inputs.json
+!project
+!project/billing
+!project/billing/application
+!project/billing/application/billing-api
+!project/billing/application/billing-api/server.py
+!project/billing/application/billing-api/checks.py
+!examples
+!examples/invoices.json
+!tests
+!tests/test_billing.py

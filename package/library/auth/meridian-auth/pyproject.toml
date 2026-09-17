@@ -1,0 +1,11 @@
+[project]
+name = "meridian-auth"
+version = "0.1.0"
+description = "Token verification shared across Meridian services"
+requires-python = ">=3.12"
+dependencies = []
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+

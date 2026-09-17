@@ -1,0 +1,5 @@
+[
+  {"id": "INV-001", "customer": "Northstar", "quantity": 1, "unit_price_cents": 1200},
+  {"id": "INV-002", "customer": "Northstar", "quantity": 2, "unit_price_cents": 800},
+  {"id": "INV-003", "customer": "Harbor", "quantity": 1, "unit_price_cents": 2000}
+]

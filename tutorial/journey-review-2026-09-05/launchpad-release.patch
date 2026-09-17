@@ -1,0 +1,455 @@
+diff --git a/package/library/auth/meridian-auth/CHANGELOG.md b/package/library/auth/meridian-auth/CHANGELOG.md
+new file mode 100644
+index 0000000..c4f9bbe
+--- /dev/null
++++ b/package/library/auth/meridian-auth/CHANGELOG.md
+@@ -0,0 +1,9 @@
++# Changelog
++
++<!-- towncrier release notes start -->
++
++## [0.2.0](https://github.com/GabrielCostanzo/orbit-demo/tree/meridian-auth/v0.2.0) - 2026-09-05
++
++### Feature
++
++- Describe the auth token audience ([`8b11f37`](https://github.com/GabrielCostanzo/orbit-demo/commit/8b11f37))
+diff --git a/package/library/auth/meridian-auth/changelog.d/.gitkeep b/package/library/auth/meridian-auth/changelog.d/.gitkeep
+new file mode 100644
+index 0000000..e69de29
+diff --git a/package/library/auth/meridian-auth/changelog.d/.release_notes/0.2.0.md b/package/library/auth/meridian-auth/changelog.d/.release_notes/0.2.0.md
+new file mode 100644
+index 0000000..edd6e1d
+--- /dev/null
++++ b/package/library/auth/meridian-auth/changelog.d/.release_notes/0.2.0.md
+@@ -0,0 +1,8 @@
++## [0.2.0](https://github.com/GabrielCostanzo/orbit-demo/tree/meridian-auth/v0.2.0) - 2026-09-05
++
++### Feature
++
++- Describe the auth token audience ([`8b11f37`](https://github.com/GabrielCostanzo/orbit-demo/commit/8b11f37))
++
++
++
+diff --git a/package/library/auth/meridian-auth/docs/CHANGELOG.md b/package/library/auth/meridian-auth/docs/CHANGELOG.md
+new file mode 100644
+index 0000000..c4f9bbe
+--- /dev/null
++++ b/package/library/auth/meridian-auth/docs/CHANGELOG.md
+@@ -0,0 +1,9 @@
++# Changelog
++
++<!-- towncrier release notes start -->
++
++## [0.2.0](https://github.com/GabrielCostanzo/orbit-demo/tree/meridian-auth/v0.2.0) - 2026-09-05
++
++### Feature
++
++- Describe the auth token audience ([`8b11f37`](https://github.com/GabrielCostanzo/orbit-demo/commit/8b11f37))
+diff --git a/package/library/auth/meridian-auth/pyproject.toml b/package/library/auth/meridian-auth/pyproject.toml
+index 81a56c8..1fda01c 100644
+--- a/package/library/auth/meridian-auth/pyproject.toml
++++ b/package/library/auth/meridian-auth/pyproject.toml
+@@ -1,6 +1,6 @@
+ [project]
+ name = "meridian-auth"
+-version = "0.1.0"
++version = "0.2.0"
+ description = "Token verification shared across Meridian services"
+ requires-python = ">=3.12"
+ dependencies = []
+@@ -9,3 +9,17 @@ dependencies = []
+ requires = ["hatchling"]
+ build-backend = "hatchling.build"
+ 
++
++[tool.towncrier]
++directory = "changelog.d"
++filename = "CHANGELOG.md"
++start_string = "<!-- towncrier release notes start -->\n"
++underlines = ["", "", ""]
++# Tags are namespaced per member: <member>/v<version> — THIS member's name is baked in.
++title_format = "## [{version}](https://github.com/GabrielCostanzo/orbit-demo/tree/meridian-auth/v{version}) - {project_date}"
++issue_format = "[`{issue}`](https://github.com/GabrielCostanzo/orbit-demo/commit/{issue})"
++orphan_prefix = "+"
++[tool.towncrier.fragment.feature]
++[tool.towncrier.fragment.bugfix]
++[tool.towncrier.fragment.removal]
++[tool.towncrier.fragment.misc]
+diff --git a/package/library/auth/meridian-auth/src/meridian_auth/__init__.py b/package/library/auth/meridian-auth/src/meridian_auth/__init__.py
+index 331ae2f..8fc08d3 100644
+--- a/package/library/auth/meridian-auth/src/meridian_auth/__init__.py
++++ b/package/library/auth/meridian-auth/src/meridian_auth/__init__.py
+@@ -1,4 +1,8 @@
+-"""Token verification shared across Meridian services"""
++"""Token verification shared across Meridian services.
++
++The audience claim identifies the Meridian service a token is intended for.
++A service should accept only tokens that name its expected audience.
++"""
+ 
+ __all__ = ["NAME"]
+ 
+diff --git a/package/library/config/meridian-config/CHANGELOG.md b/package/library/config/meridian-config/CHANGELOG.md
+new file mode 100644
+index 0000000..b132379
+--- /dev/null
++++ b/package/library/config/meridian-config/CHANGELOG.md
+@@ -0,0 +1,3 @@
++# Changelog
++
++<!-- towncrier release notes start -->
+diff --git a/package/library/config/meridian-config/changelog.d/.gitkeep b/package/library/config/meridian-config/changelog.d/.gitkeep
+new file mode 100644
+index 0000000..e69de29
+diff --git a/package/library/config/meridian-config/pyproject.toml b/package/library/config/meridian-config/pyproject.toml
+index 7a425b0..6e227db 100644
+--- a/package/library/config/meridian-config/pyproject.toml
++++ b/package/library/config/meridian-config/pyproject.toml
+@@ -9,3 +9,17 @@ dependencies = []
+ requires = ["hatchling"]
+ build-backend = "hatchling.build"
+ 
++
++[tool.towncrier]
++directory = "changelog.d"
++filename = "CHANGELOG.md"
++start_string = "<!-- towncrier release notes start -->\n"
++underlines = ["", "", ""]
++# Tags are namespaced per member: <member>/v<version> — THIS member's name is baked in.
++title_format = "## [{version}](https://github.com/GabrielCostanzo/orbit-demo/tree/meridian-config/v{version}) - {project_date}"
++issue_format = "[`{issue}`](https://github.com/GabrielCostanzo/orbit-demo/commit/{issue})"
++orphan_prefix = "+"
++[tool.towncrier.fragment.feature]
++[tool.towncrier.fragment.bugfix]
++[tool.towncrier.fragment.removal]
++[tool.towncrier.fragment.misc]
+diff --git a/package/library/observability/meridian-telemetry/CHANGELOG.md b/package/library/observability/meridian-telemetry/CHANGELOG.md
+new file mode 100644
+index 0000000..b132379
+--- /dev/null
++++ b/package/library/observability/meridian-telemetry/CHANGELOG.md
+@@ -0,0 +1,3 @@
++# Changelog
++
++<!-- towncrier release notes start -->
+diff --git a/package/library/observability/meridian-telemetry/changelog.d/.gitkeep b/package/library/observability/meridian-telemetry/changelog.d/.gitkeep
+new file mode 100644
+index 0000000..e69de29
+diff --git a/package/library/observability/meridian-telemetry/pyproject.toml b/package/library/observability/meridian-telemetry/pyproject.toml
+index f1069b2..91cf42a 100644
+--- a/package/library/observability/meridian-telemetry/pyproject.toml
++++ b/package/library/observability/meridian-telemetry/pyproject.toml
+@@ -14,3 +14,17 @@ build-backend = "hatchling.build"
+ [tool.uv.sources]
+ meridian-config = { workspace = true }
+ 
++
++[tool.towncrier]
++directory = "changelog.d"
++filename = "CHANGELOG.md"
++start_string = "<!-- towncrier release notes start -->\n"
++underlines = ["", "", ""]
++# Tags are namespaced per member: <member>/v<version> — THIS member's name is baked in.
++title_format = "## [{version}](https://github.com/GabrielCostanzo/orbit-demo/tree/meridian-telemetry/v{version}) - {project_date}"
++issue_format = "[`{issue}`](https://github.com/GabrielCostanzo/orbit-demo/commit/{issue})"
++orphan_prefix = "+"
++[tool.towncrier.fragment.feature]
++[tool.towncrier.fragment.bugfix]
++[tool.towncrier.fragment.removal]
++[tool.towncrier.fragment.misc]
+diff --git a/package/library/ratelimit/meridian-ratelimit/CHANGELOG.md b/package/library/ratelimit/meridian-ratelimit/CHANGELOG.md
+new file mode 100644
+index 0000000..b132379
+--- /dev/null
++++ b/package/library/ratelimit/meridian-ratelimit/CHANGELOG.md
+@@ -0,0 +1,3 @@
++# Changelog
++
++<!-- towncrier release notes start -->
+diff --git a/package/library/ratelimit/meridian-ratelimit/changelog.d/.gitkeep b/package/library/ratelimit/meridian-ratelimit/changelog.d/.gitkeep
+new file mode 100644
+index 0000000..e69de29
+diff --git a/package/library/ratelimit/meridian-ratelimit/pyproject.toml b/package/library/ratelimit/meridian-ratelimit/pyproject.toml
+index 11174bd..b376c91 100644
+--- a/package/library/ratelimit/meridian-ratelimit/pyproject.toml
++++ b/package/library/ratelimit/meridian-ratelimit/pyproject.toml
+@@ -8,3 +8,17 @@ dependencies = []
+ [build-system]
+ requires = ["hatchling"]
+ build-backend = "hatchling.build"
++
++[tool.towncrier]
++directory = "changelog.d"
++filename = "CHANGELOG.md"
++start_string = "<!-- towncrier release notes start -->\n"
++underlines = ["", "", ""]
++# Tags are namespaced per member: <member>/v<version> — THIS member's name is baked in.
++title_format = "## [{version}](https://github.com/GabrielCostanzo/orbit-demo/tree/meridian-ratelimit/v{version}) - {project_date}"
++issue_format = "[`{issue}`](https://github.com/GabrielCostanzo/orbit-demo/commit/{issue})"
++orphan_prefix = "+"
++[tool.towncrier.fragment.feature]
++[tool.towncrier.fragment.bugfix]
++[tool.towncrier.fragment.removal]
++[tool.towncrier.fragment.misc]
+diff --git a/package/library/search/meridian-search/CHANGELOG.md b/package/library/search/meridian-search/CHANGELOG.md
+new file mode 100644
+index 0000000..b132379
+--- /dev/null
++++ b/package/library/search/meridian-search/CHANGELOG.md
+@@ -0,0 +1,3 @@
++# Changelog
++
++<!-- towncrier release notes start -->
+diff --git a/package/library/search/meridian-search/changelog.d/.gitkeep b/package/library/search/meridian-search/changelog.d/.gitkeep
+new file mode 100644
+index 0000000..e69de29
+diff --git a/package/library/search/meridian-search/pyproject.toml b/package/library/search/meridian-search/pyproject.toml
+index e06ebae..f17900c 100644
+--- a/package/library/search/meridian-search/pyproject.toml
++++ b/package/library/search/meridian-search/pyproject.toml
+@@ -13,3 +13,17 @@ build-backend = "hatchling.build"
+ 
+ [tool.uv.sources]
+ meridian-auth = { workspace = true }
++
++[tool.towncrier]
++directory = "changelog.d"
++filename = "CHANGELOG.md"
++start_string = "<!-- towncrier release notes start -->\n"
++underlines = ["", "", ""]
++# Tags are namespaced per member: <member>/v<version> — THIS member's name is baked in.
++title_format = "## [{version}](https://github.com/GabrielCostanzo/orbit-demo/tree/meridian-search/v{version}) - {project_date}"
++issue_format = "[`{issue}`](https://github.com/GabrielCostanzo/orbit-demo/commit/{issue})"
++orphan_prefix = "+"
++[tool.towncrier.fragment.feature]
++[tool.towncrier.fragment.bugfix]
++[tool.towncrier.fragment.removal]
++[tool.towncrier.fragment.misc]
+diff --git a/project/billing/application/billing-api/CHANGELOG.md b/project/billing/application/billing-api/CHANGELOG.md
+new file mode 100644
+index 0000000..b132379
+--- /dev/null
++++ b/project/billing/application/billing-api/CHANGELOG.md
+@@ -0,0 +1,3 @@
++# Changelog
++
++<!-- towncrier release notes start -->
+diff --git a/project/billing/application/billing-api/changelog.d/.gitkeep b/project/billing/application/billing-api/changelog.d/.gitkeep
+new file mode 100644
+index 0000000..e69de29
+diff --git a/project/billing/application/billing-api/pyproject.toml b/project/billing/application/billing-api/pyproject.toml
+index 12aca19..4b4d483 100644
+--- a/project/billing/application/billing-api/pyproject.toml
++++ b/project/billing/application/billing-api/pyproject.toml
+@@ -31,3 +31,17 @@ audience = "entitlement"
+ display_name = "Revenue reports"
+ description = "Entitled reporting surface."
+ audience = "entitlement"
++
++[tool.towncrier]
++directory = "changelog.d"
++filename = "CHANGELOG.md"
++start_string = "<!-- towncrier release notes start -->\n"
++underlines = ["", "", ""]
++# Tags are namespaced per member: <member>/v<version> — THIS member's name is baked in.
++title_format = "## [{version}](https://github.com/GabrielCostanzo/orbit-demo/tree/billing-api/v{version}) - {project_date}"
++issue_format = "[`{issue}`](https://github.com/GabrielCostanzo/orbit-demo/commit/{issue})"
++orphan_prefix = "+"
++[tool.towncrier.fragment.feature]
++[tool.towncrier.fragment.bugfix]
++[tool.towncrier.fragment.removal]
++[tool.towncrier.fragment.misc]
+diff --git a/project/billing/package/meridian-billing-core/CHANGELOG.md b/project/billing/package/meridian-billing-core/CHANGELOG.md
+new file mode 100644
+index 0000000..b132379
+--- /dev/null
++++ b/project/billing/package/meridian-billing-core/CHANGELOG.md
+@@ -0,0 +1,3 @@
++# Changelog
++
++<!-- towncrier release notes start -->
+diff --git a/project/billing/package/meridian-billing-core/changelog.d/.gitkeep b/project/billing/package/meridian-billing-core/changelog.d/.gitkeep
+new file mode 100644
+index 0000000..e69de29
+diff --git a/project/billing/package/meridian-billing-core/pyproject.toml b/project/billing/package/meridian-billing-core/pyproject.toml
+index 552fcf5..af98ca7 100644
+--- a/project/billing/package/meridian-billing-core/pyproject.toml
++++ b/project/billing/package/meridian-billing-core/pyproject.toml
+@@ -16,3 +16,17 @@
+ meridian-auth = { workspace = true }
+ meridian-billing-ledger = { workspace = true }
+ 
++
++[tool.towncrier]
++directory = "changelog.d"
++filename = "CHANGELOG.md"
++start_string = "<!-- towncrier release notes start -->\n"
++underlines = ["", "", ""]
++# Tags are namespaced per member: <member>/v<version> — THIS member's name is baked in.
++title_format = "## [{version}](https://github.com/GabrielCostanzo/orbit-demo/tree/meridian-billing-core/v{version}) - {project_date}"
++issue_format = "[`{issue}`](https://github.com/GabrielCostanzo/orbit-demo/commit/{issue})"
++orphan_prefix = "+"
++[tool.towncrier.fragment.feature]
++[tool.towncrier.fragment.bugfix]
++[tool.towncrier.fragment.removal]
++[tool.towncrier.fragment.misc]
+diff --git a/project/billing/package/meridian-billing-ledger/CHANGELOG.md b/project/billing/package/meridian-billing-ledger/CHANGELOG.md
+new file mode 100644
+index 0000000..b132379
+--- /dev/null
++++ b/project/billing/package/meridian-billing-ledger/CHANGELOG.md
+@@ -0,0 +1,3 @@
++# Changelog
++
++<!-- towncrier release notes start -->
+diff --git a/project/billing/package/meridian-billing-ledger/changelog.d/.gitkeep b/project/billing/package/meridian-billing-ledger/changelog.d/.gitkeep
+new file mode 100644
+index 0000000..e69de29
+diff --git a/project/billing/package/meridian-billing-ledger/pyproject.toml b/project/billing/package/meridian-billing-ledger/pyproject.toml
+index a58ef35..73ea862 100644
+--- a/project/billing/package/meridian-billing-ledger/pyproject.toml
++++ b/project/billing/package/meridian-billing-ledger/pyproject.toml
+@@ -13,3 +13,17 @@ build-backend = "hatchling.build"
+ 
+ [tool.uv.sources]
+ meridian-billing-models = { workspace = true }
++
++[tool.towncrier]
++directory = "changelog.d"
++filename = "CHANGELOG.md"
++start_string = "<!-- towncrier release notes start -->\n"
++underlines = ["", "", ""]
++# Tags are namespaced per member: <member>/v<version> — THIS member's name is baked in.
++title_format = "## [{version}](https://github.com/GabrielCostanzo/orbit-demo/tree/meridian-billing-ledger/v{version}) - {project_date}"
++issue_format = "[`{issue}`](https://github.com/GabrielCostanzo/orbit-demo/commit/{issue})"
++orphan_prefix = "+"
++[tool.towncrier.fragment.feature]
++[tool.towncrier.fragment.bugfix]
++[tool.towncrier.fragment.removal]
++[tool.towncrier.fragment.misc]
+diff --git a/project/billing/package/meridian-billing-models/CHANGELOG.md b/project/billing/package/meridian-billing-models/CHANGELOG.md
+new file mode 100644
+index 0000000..b132379
+--- /dev/null
++++ b/project/billing/package/meridian-billing-models/CHANGELOG.md
+@@ -0,0 +1,3 @@
++# Changelog
++
++<!-- towncrier release notes start -->
+diff --git a/project/billing/package/meridian-billing-models/changelog.d/.gitkeep b/project/billing/package/meridian-billing-models/changelog.d/.gitkeep
+new file mode 100644
+index 0000000..e69de29
+diff --git a/project/billing/package/meridian-billing-models/pyproject.toml b/project/billing/package/meridian-billing-models/pyproject.toml
+index a488647..5ec7782 100644
+--- a/project/billing/package/meridian-billing-models/pyproject.toml
++++ b/project/billing/package/meridian-billing-models/pyproject.toml
+@@ -8,3 +8,17 @@ dependencies = []
+ [build-system]
+ requires = ["hatchling"]
+ build-backend = "hatchling.build"
++
++[tool.towncrier]
++directory = "changelog.d"
++filename = "CHANGELOG.md"
++start_string = "<!-- towncrier release notes start -->\n"
++underlines = ["", "", ""]
++# Tags are namespaced per member: <member>/v<version> — THIS member's name is baked in.
++title_format = "## [{version}](https://github.com/GabrielCostanzo/orbit-demo/tree/meridian-billing-models/v{version}) - {project_date}"
++issue_format = "[`{issue}`](https://github.com/GabrielCostanzo/orbit-demo/commit/{issue})"
++orphan_prefix = "+"
++[tool.towncrier.fragment.feature]
++[tool.towncrier.fragment.bugfix]
++[tool.towncrier.fragment.removal]
++[tool.towncrier.fragment.misc]
+diff --git a/project/billing/package/meridian-billing-sdk/CHANGELOG.md b/project/billing/package/meridian-billing-sdk/CHANGELOG.md
+new file mode 100644
+index 0000000..b132379
+--- /dev/null
++++ b/project/billing/package/meridian-billing-sdk/CHANGELOG.md
+@@ -0,0 +1,3 @@
++# Changelog
++
++<!-- towncrier release notes start -->
+diff --git a/project/billing/package/meridian-billing-sdk/changelog.d/.gitkeep b/project/billing/package/meridian-billing-sdk/changelog.d/.gitkeep
+new file mode 100644
+index 0000000..e69de29
+diff --git a/project/billing/package/meridian-billing-sdk/pyproject.toml b/project/billing/package/meridian-billing-sdk/pyproject.toml
+index db5ba91..6c78d9a 100644
+--- a/project/billing/package/meridian-billing-sdk/pyproject.toml
++++ b/project/billing/package/meridian-billing-sdk/pyproject.toml
+@@ -8,3 +8,17 @@ dependencies = []
+ [build-system]
+ requires = ["hatchling"]
+ build-backend = "hatchling.build"
++
++[tool.towncrier]
++directory = "changelog.d"
++filename = "CHANGELOG.md"
++start_string = "<!-- towncrier release notes start -->\n"
++underlines = ["", "", ""]
++# Tags are namespaced per member: <member>/v<version> — THIS member's name is baked in.
++title_format = "## [{version}](https://github.com/GabrielCostanzo/orbit-demo/tree/meridian-billing-sdk/v{version}) - {project_date}"
++issue_format = "[`{issue}`](https://github.com/GabrielCostanzo/orbit-demo/commit/{issue})"
++orphan_prefix = "+"
++[tool.towncrier.fragment.feature]
++[tool.towncrier.fragment.bugfix]
++[tool.towncrier.fragment.removal]
++[tool.towncrier.fragment.misc]
+diff --git a/project/notifications/package/meridian-notify/CHANGELOG.md b/project/notifications/package/meridian-notify/CHANGELOG.md
+new file mode 100644
+index 0000000..b132379
+--- /dev/null
++++ b/project/notifications/package/meridian-notify/CHANGELOG.md
+@@ -0,0 +1,3 @@
++# Changelog
++
++<!-- towncrier release notes start -->
+diff --git a/project/notifications/package/meridian-notify/changelog.d/.gitkeep b/project/notifications/package/meridian-notify/changelog.d/.gitkeep
+new file mode 100644
+index 0000000..e69de29
+diff --git a/project/notifications/package/meridian-notify/pyproject.toml b/project/notifications/package/meridian-notify/pyproject.toml
+index 99eb744..269069a 100644
+--- a/project/notifications/package/meridian-notify/pyproject.toml
++++ b/project/notifications/package/meridian-notify/pyproject.toml
+@@ -14,3 +14,17 @@
+ [tool.uv.sources]
+ meridian-config = { workspace = true }
+ 
++
++[tool.towncrier]
++directory = "changelog.d"
++filename = "CHANGELOG.md"
++start_string = "<!-- towncrier release notes start -->\n"
++underlines = ["", "", ""]
++# Tags are namespaced per member: <member>/v<version> — THIS member's name is baked in.
++title_format = "## [{version}](https://github.com/GabrielCostanzo/orbit-demo/tree/meridian-notify/v{version}) - {project_date}"
++issue_format = "[`{issue}`](https://github.com/GabrielCostanzo/orbit-demo/commit/{issue})"
++orphan_prefix = "+"
++[tool.towncrier.fragment.feature]
++[tool.towncrier.fragment.bugfix]
++[tool.towncrier.fragment.removal]
++[tool.towncrier.fragment.misc]
+diff --git a/pyproject.toml b/pyproject.toml
+index 4b8edfc..f0ecef4 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -65,3 +65,6 @@ tier = "public"
+ 
+ [tool.orbit.registry.members.meridian-notify]
+ tier = "private"
++
++[tool.launchpad]
++workflow = "solo"
+diff --git a/uv.lock b/uv.lock
+index e06b050..f340890 100644
+--- a/uv.lock
++++ b/uv.lock
+@@ -30,7 +30,7 @@ requires-dist = [{ name = "meridian-billing-core", editable = "project/billing/p
+ 
+ [[package]]
+ name = "meridian-auth"
+-version = "0.1.0"
++version = "0.2.0"
+ source = { editable = "package/library/auth/meridian-auth" }
+ 
+ [[package]]

@@ -1,0 +1,67 @@
+[tool.uv.workspace]
+members = ["package/*/*/*", "project/*/package/*", "project/*/application/*"]
+# notify-worker declares itself through an adjacent orbit.toml, so it must
+# not also be a uv member -- declaring both is a mode conflict.
+exclude = ["project/notifications/application/notify-worker"]
+
+[tool.orbit]
+tenant_name = "meridian"
+
+[tool.orbit.registry]
+schema = 2
+source_key = "meridian/monorepo"
+workspace_slug = "meridian"
+fallback_resource = "library.meridian"
+default_tier = "private"
+placement_policy = "follow"
+upstream = "pypi"
+
+# Every package group declares `branches` explicitly. Derivation only sees
+# access levels named by member overrides and path rules, so a group that hosts
+# more than one level can otherwise derive a single-level set and fail the plan.
+[tool.orbit.registry.resources."library.auth"]
+display_name = "Authentication"
+description = "Token verification shared by every service"
+branches = ["public", "protected", "private"]
+
+[tool.orbit.registry.resources."library.config"]
+display_name = "Configuration"
+branches = ["public", "protected", "private"]
+
+[tool.orbit.registry.resources."library.observability"]
+display_name = "Observability"
+branches = ["private"]
+
+[tool.orbit.registry.resources."project.billing"]
+branches = ["public", "protected", "private"]
+
+[tool.orbit.registry.resources."project.notifications"]
+display_name = "Notifications"
+branches = ["protected", "private"]
+
+[tool.orbit.registry.members.meridian-auth]
+tier = "public"
+
+[tool.orbit.registry.members.meridian-config]
+tier = "public"
+
+[tool.orbit.registry.members.meridian-telemetry]
+tier = "private"
+
+[tool.orbit.registry.members.meridian-billing-core]
+tier = "protected"
+
+[tool.orbit.registry.members.meridian-billing-cli]
+tier = "protected"
+
+[tool.orbit.registry.members.meridian-billing-ledger]
+tier = "protected"
+
+[tool.orbit.registry.members.meridian-billing-models]
+tier = "protected"
+
+[tool.orbit.registry.members.meridian-billing-sdk]
+tier = "public"
+
+[tool.orbit.registry.members.meridian-notify]
+tier = "protected"

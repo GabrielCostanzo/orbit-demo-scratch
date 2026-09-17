@@ -1,0 +1,208 @@
+diff --git a/package/library/observability/meridian-telemetry/pyproject.toml b/package/library/observability/meridian-telemetry/pyproject.toml
+index 6b5723a..f1069b2 100644
+--- a/package/library/observability/meridian-telemetry/pyproject.toml
++++ b/package/library/observability/meridian-telemetry/pyproject.toml
+@@ -3,9 +3,14 @@ name = "meridian-telemetry"
+ version = "0.1.0"
+ description = "Internal tracing helpers"
+ requires-python = ">=3.12"
+-dependencies = []
++dependencies = [
++    "meridian-config",
++]
+ 
+ [build-system]
+ requires = ["hatchling"]
+ build-backend = "hatchling.build"
+ 
++[tool.uv.sources]
++meridian-config = { workspace = true }
++
+diff --git a/package/library/ratelimit/meridian-ratelimit/pyproject.toml b/package/library/ratelimit/meridian-ratelimit/pyproject.toml
+new file mode 100644
+index 0000000..11174bd
+--- /dev/null
++++ b/package/library/ratelimit/meridian-ratelimit/pyproject.toml
+@@ -0,0 +1,10 @@
++[project]
++name = "meridian-ratelimit"
++version = "0.1.0"
++description = "Request throttling helpers"
++requires-python = ">=3.12"
++dependencies = []
++
++[build-system]
++requires = ["hatchling"]
++build-backend = "hatchling.build"
+diff --git a/package/library/ratelimit/meridian-ratelimit/src/meridian_ratelimit/__init__.py b/package/library/ratelimit/meridian-ratelimit/src/meridian_ratelimit/__init__.py
+new file mode 100644
+index 0000000..94aa17c
+--- /dev/null
++++ b/package/library/ratelimit/meridian-ratelimit/src/meridian_ratelimit/__init__.py
+@@ -0,0 +1,2 @@
++def hello() -> str:
++    return "Hello from meridian-ratelimit!"
+diff --git a/package/library/ratelimit/meridian-ratelimit/src/meridian_ratelimit/py.typed b/package/library/ratelimit/meridian-ratelimit/src/meridian_ratelimit/py.typed
+new file mode 100644
+index 0000000..e69de29
+diff --git a/project/billing/application/billing-api/pyproject.toml b/project/billing/application/billing-api/pyproject.toml
+index 8d9f4f8..12aca19 100644
+--- a/project/billing/application/billing-api/pyproject.toml
++++ b/project/billing/application/billing-api/pyproject.toml
+@@ -19,13 +19,13 @@ kind = "service"
+ 
+ [tool.orbit.registry.endpoints.health]
+ display_name = "Health"
+-description = "Liveness probe used by operators."
++description = "Liveness probe used by operators and the uptime checker."
+ audience = "internal"
+ 
+ [tool.orbit.registry.endpoints.console]
+ display_name = "Billing console"
+ description = "Self-service console for tenant members."
+-audience = "tenant_member"
++audience = "entitlement"
+ 
+ [tool.orbit.registry.endpoints.reports]
+ display_name = "Revenue reports"
+diff --git a/project/billing/package/meridian-billing-cli/pyproject.toml b/project/billing/package/meridian-billing-cli/pyproject.toml
+deleted file mode 100644
+index 3bd646a..0000000
+--- a/project/billing/package/meridian-billing-cli/pyproject.toml
++++ /dev/null
+@@ -1,16 +0,0 @@
+-        [project]
+-        name = "meridian-billing-cli"
+-        version = "0.1.0"
+-        description = "Operator CLI for billing"
+-        requires-python = ">=3.12"
+-        dependencies = [
+-    "meridian-billing-core",
+-]
+-
+-        [build-system]
+-        requires = ["hatchling"]
+-        build-backend = "hatchling.build"
+-
+-[tool.uv.sources]
+-meridian-billing-core = { workspace = true }
+-
+diff --git a/project/billing/package/meridian-billing-cli/src/meridian_billing_cli/__init__.py b/project/billing/package/meridian-billing-cli/src/meridian_billing_cli/__init__.py
+deleted file mode 100644
+index 826c28f..0000000
+--- a/project/billing/package/meridian-billing-cli/src/meridian_billing_cli/__init__.py
++++ /dev/null
+@@ -1,5 +0,0 @@
+-"""Operator CLI for billing"""
+-
+-__all__ = ["NAME"]
+-
+-NAME = "meridian-billing-cli"
+diff --git a/project/notifications/application/notify-worker/orbit.toml b/project/notifications/application/notify-worker/orbit.toml
+index 0a81090..c7698e9 100644
+--- a/project/notifications/application/notify-worker/orbit.toml
++++ b/project/notifications/application/notify-worker/orbit.toml
+@@ -2,7 +2,7 @@
+ # than a uv member table. It must name itself, because there is no [project]
+ # table to read the name from -- but like the uv form, it declares no UUIDs.
+ [registry]
+-name = "notify-worker"
++name = "notify-dispatcher"
+ kind = "worker"
+ description = "Delivers queued notifications"
+ 
+diff --git a/pyproject.toml b/pyproject.toml
+index 601a2f3..4b8edfc 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -37,22 +37,22 @@ branches = ["public", "protected", "private"]
+ 
+ [tool.orbit.registry.resources."project.notifications"]
+ display_name = "Notifications"
+-branches = ["protected", "private"]
++branches = ["public", "protected", "private"]
+ 
+ [tool.orbit.registry.members.meridian-auth]
+ tier = "public"
++pin = true
+ 
+ [tool.orbit.registry.members.meridian-config]
+ tier = "public"
+ 
+ [tool.orbit.registry.members.meridian-telemetry]
+ tier = "private"
++resource = "library.config"
+ 
+ [tool.orbit.registry.members.meridian-billing-core]
+ tier = "protected"
+ 
+-[tool.orbit.registry.members.meridian-billing-cli]
+-tier = "protected"
+ 
+ [tool.orbit.registry.members.meridian-billing-ledger]
+ tier = "protected"
+@@ -64,4 +64,4 @@ tier = "protected"
+ tier = "public"
+ 
+ [tool.orbit.registry.members.meridian-notify]
+-tier = "protected"
++tier = "private"
+diff --git a/uv.lock b/uv.lock
+index 28fde95..e06b050 100644
+--- a/uv.lock
++++ b/uv.lock
+@@ -6,13 +6,13 @@ requires-python = ">=3.12"
+ members = [
+     "billing-api",
+     "meridian-auth",
+-    "meridian-billing-cli",
+     "meridian-billing-core",
+     "meridian-billing-ledger",
+     "meridian-billing-models",
+     "meridian-billing-sdk",
+     "meridian-config",
+     "meridian-notify",
++    "meridian-ratelimit",
+     "meridian-search",
+     "meridian-telemetry",
+ ]
+@@ -33,17 +33,6 @@ name = "meridian-auth"
+ version = "0.1.0"
+ source = { editable = "package/library/auth/meridian-auth" }
+ 
+-[[package]]
+-name = "meridian-billing-cli"
+-version = "0.1.0"
+-source = { editable = "project/billing/package/meridian-billing-cli" }
+-dependencies = [
+-    { name = "meridian-billing-core" },
+-]
+-
+-[package.metadata]
+-requires-dist = [{ name = "meridian-billing-core", editable = "project/billing/package/meridian-billing-core" }]
+-
+ [[package]]
+ name = "meridian-billing-core"
+ version = "0.1.0"
+@@ -96,6 +85,11 @@ dependencies = [
+ [package.metadata]
+ requires-dist = [{ name = "meridian-config", editable = "package/library/config/meridian-config" }]
+ 
++[[package]]
++name = "meridian-ratelimit"
++version = "0.1.0"
++source = { editable = "package/library/ratelimit/meridian-ratelimit" }
++
+ [[package]]
+ name = "meridian-search"
+ version = "0.1.0"
+@@ -111,3 +105,9 @@ requires-dist = [{ name = "meridian-auth", editable = "package/library/auth/meri
+ name = "meridian-telemetry"
+ version = "0.1.0"
+ source = { editable = "package/library/observability/meridian-telemetry" }
++dependencies = [
++    { name = "meridian-config" },
++]
++
++[package.metadata]
++requires-dist = [{ name = "meridian-config", editable = "package/library/config/meridian-config" }]

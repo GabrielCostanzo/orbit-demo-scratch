@@ -1,0 +1,5 @@
+#!/bin/sh
+# Keep the helper independent of the workspace and its consumer credentials.
+set -eu
+DEMO_ROOT=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+exec uv run --no-project --python 3.12 python "$DEMO_ROOT/scripts/demo.py" "$@"

@@ -1,0 +1,115 @@
+version = 1
+revision = 3
+requires-python = ">=3.12"
+
+[manifest]
+members = [
+    "billing-api",
+    "meridian-auth",
+    "meridian-billing-cli",
+    "meridian-billing-core",
+    "meridian-billing-ledger",
+    "meridian-billing-models",
+    "meridian-billing-sdk",
+    "meridian-config",
+    "meridian-notify",
+    "meridian-search",
+    "meridian-telemetry",
+]
+
+[[package]]
+name = "billing-api"
+version = "0.1.0"
+source = { virtual = "project/billing/application/billing-api" }
+dependencies = [
+    { name = "meridian-billing-core" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "meridian-billing-core", editable = "project/billing/package/meridian-billing-core" }]
+
+[[package]]
+name = "meridian-auth"
+version = "0.1.0"
+source = { editable = "package/library/auth/meridian-auth" }
+
+[[package]]
+name = "meridian-billing-cli"
+version = "0.1.0"
+source = { editable = "project/billing/package/meridian-billing-cli" }
+dependencies = [
+    { name = "meridian-billing-core" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "meridian-billing-core", editable = "project/billing/package/meridian-billing-core" }]
+
+[[package]]
+name = "meridian-billing-core"
+version = "0.1.0"
+source = { editable = "project/billing/package/meridian-billing-core" }
+dependencies = [
+    { name = "meridian-auth" },
+    { name = "meridian-billing-ledger" },
+    { name = "meridian-billing-sdk" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "meridian-auth", editable = "package/library/auth/meridian-auth" },
+    { name = "meridian-billing-ledger", editable = "project/billing/package/meridian-billing-ledger" },
+    { name = "meridian-billing-sdk", editable = "project/billing/package/meridian-billing-sdk" },
+]
+
+[[package]]
+name = "meridian-billing-ledger"
+version = "0.1.0"
+source = { editable = "project/billing/package/meridian-billing-ledger" }
+dependencies = [
+    { name = "meridian-billing-models" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "meridian-billing-models", editable = "project/billing/package/meridian-billing-models" }]
+
+[[package]]
+name = "meridian-billing-models"
+version = "0.1.0"
+source = { editable = "project/billing/package/meridian-billing-models" }
+
+[[package]]
+name = "meridian-billing-sdk"
+version = "0.1.0"
+source = { editable = "project/billing/package/meridian-billing-sdk" }
+
+[[package]]
+name = "meridian-config"
+version = "0.1.0"
+source = { editable = "package/library/config/meridian-config" }
+
+[[package]]
+name = "meridian-notify"
+version = "0.1.0"
+source = { editable = "project/notifications/package/meridian-notify" }
+dependencies = [
+    { name = "meridian-config" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "meridian-config", editable = "package/library/config/meridian-config" }]
+
+[[package]]
+name = "meridian-search"
+version = "0.1.0"
+source = { editable = "package/library/search/meridian-search" }
+dependencies = [
+    { name = "meridian-auth" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "meridian-auth", editable = "package/library/auth/meridian-auth" }]
+
+[[package]]
+name = "meridian-telemetry"
+version = "0.1.0"
+source = { editable = "package/library/observability/meridian-telemetry" }
