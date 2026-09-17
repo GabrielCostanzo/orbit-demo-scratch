@@ -297,7 +297,7 @@ def publish(selection: str, run_id: str | None) -> None:
         for package in selected:
             record = manifest["packages"][package]
             profile = "meridian-auth-release" if package == "meridian-auth" else "meridian-billing-release"
-            credential = ["--profile", profile, "--origin", connection["origin"], "--tenant", connection["tenant_id"]]
+            credential = ["--profile", profile, "--tenant", connection["tenant_id"]]
             # The same package/version in this CI run always resumes the same promotion.
             identity = f"{repository}:{run_id}:{result['attempt']}:{package}:{record['version']}"
             key = "meridian:" + hashlib.sha256(identity.encode()).hexdigest()[:48]
