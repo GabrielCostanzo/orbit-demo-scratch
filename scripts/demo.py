@@ -315,8 +315,17 @@ def publish(selection: str, run_id: str | None) -> None:
                 evidence_path = directory / "ci-evidence.json"
                 write_json(evidence_path, evidence)
                 run(*command, "--ci-evidence", evidence_path)
-                print(f"Approve {package} {record['version']}: "
-                      f"{connection['origin']}/+app/t/{connection['tenant_id']}/releases/{promotion['id']}", flush=True)
+                approval_url = (f"{connection['origin']}/+app/t/{connection['tenant_id']}"
+                                f"/releases/{promotion['id']}")
+                print(
+                    f"\nACTION NEEDED: {package} {record['version']} is waiting for your approval.\n"
+                    f"  1. Open this page in your browser, signed in as an approver:\n"
+                    f"     {approval_url}\n"
+                    f"  2. Review the candidate and press \"Approve exact candidate\".\n"
+                    f"  The helper waits up to 5 minutes for that approval. If it times out, approve\n"
+                    f"  the page and rerun this command; it resumes the same promotion.\n",
+                    flush=True,
+                )
                 run(*command, "--wait")
             print(f"{package} {record['version']}: production ready.")
     write_json(state_dir() / "last-release.json",
